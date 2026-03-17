@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQEM 数字化管理决策中心 - 紧凑演示版</title>
+    <title>SQEM 数字化管理决策中心 - 权限隔离版</title>
     
     <!-- 引入资源 -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,14 +25,13 @@
             --ios-border: rgba(0, 0, 0, 0.04);
         }
 
-        /* --- 全局 Apple 字体栈 --- */
         body { 
             background-color: var(--ios-bg); 
             color: var(--ios-text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC", "SF Pro Display", "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC", "SF Pro Display", "PingFang SC", "Helvetica Neue", sans-serif;
             -webkit-font-smoothing: antialiased;
             letter-spacing: -0.022em;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         /* --- 角色进入门户 --- */
@@ -66,7 +65,6 @@
         .role-card:hover { transform: scale(1.05); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
         .role-icon { font-size: 32px; margin-bottom: 20px; color: var(--ios-blue); }
 
-        /* --- 磁贴高度定制 (h-40) --- */
         .h-40 { height: 160px; }
 
         /* --- 主看板玻璃卡片 --- */
@@ -82,7 +80,6 @@
         .card-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
         .card-title-bold { font-weight: 600; font-size: 16px; color: var(--ios-text-main); text-align: left; }
 
-        /* --- 放大镜搜索按钮 --- */
         .search-trigger-btn {
             width: 30px;
             height: 30px;
@@ -97,7 +94,6 @@
         }
         .search-trigger-btn:hover { background: var(--ios-blue); color: white; transform: scale(1.1); }
 
-        /* --- 迷你进度胶囊 --- */
         .mini-progress-wrap {
             width: 80px;
             height: 16px;
@@ -120,16 +116,14 @@
             text-shadow: 0 1px 1px rgba(0,0,0,0.2);
         }
 
-        /* --- 标准表格与水平居中 --- */
         .standard-table { width: 100%; border-collapse: collapse; }
         .standard-table th { font-size: 11px; color: var(--ios-text-sec); padding: 10px 8px; text-align: center; border-bottom: 1px solid #F5F5F7; font-weight: 600; text-transform: uppercase; }
-        .standard-table td { padding: 12px 8px; font-size: 14px; text-align: center; border-bottom: 1px solid #F5F5F7; color: #1d1d1f; font-weight: 400; }
+        .standard-table td { padding: 12px 8px; font-size: 14px; text-align: center; border-bottom: 1px solid #F5F5F7; color: #1d1d1f; }
         .standard-table tr:last-child td { border-bottom: none; }
 
         .red-alert { color: var(--ios-red) !important; font-weight: 600; }
         .exit-btn { padding: 8px 16px; border-radius: 12px; background: rgba(0, 122, 255, 0.08); color: var(--ios-blue); font-size: 12px; font-weight: 600; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
 
-        /* --- 多选下拉 --- */
         .ios-multiselect { position: relative; width: 340px; background: rgba(118, 118, 128, 0.08); border-radius: 12px; padding: 12px 18px; font-size: 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
         .multiselect-dropdown { position: absolute; top: 55px; right: 0; width: 100%; background: white; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.1); display: none; z-index: 2000; padding: 12px; max-height: 400px; overflow-y: auto; border: 1px solid rgba(0,0,0,0.05); }
         .multiselect-option { padding: 12px 14px; border-radius: 10px; display: flex; align-items: center; gap: 12px; font-size: 14px; }
@@ -153,8 +147,6 @@
 
         .animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .scroll-container { scrollbar-width: none; -ms-overflow-style: none; }
-        .scroll-container::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="p-4 md:p-8 max-w-[1700px] mx-auto" onclick="closeDropdowns()">
@@ -169,25 +161,25 @@
             <p class="text-[#86868b] font-medium mb-16 uppercase tracking-[0.2em] text-[11px]">System Authority Entry Portal</p>
             
             <div class="role-grid">
-                <div class="role-card" onclick="enterApp('总监', '全集团总监视图', '全局')">
+                <div class="role-card" onclick="enterApp('总监', '全集团总监', '全局')">
                     <div class="role-icon"><i class="fa-solid fa-crown"></i></div>
                     <div class="font-bold text-lg">总监</div>
                 </div>
-                <div class="role-card" onclick="enterApp('部长', '朱小超 (部长)', '整车部')">
+                <div class="role-card" onclick="enterApp('部长', '朱小超', '整车部')">
                     <div class="role-icon"><i class="fa-solid fa-briefcase"></i></div>
                     <div class="font-bold text-lg">部长</div>
                 </div>
-                <div class="role-card" onclick="enterApp('科长', '沈吉 (科长)', '功能科')">
+                <div class="role-card" onclick="enterApp('科长', '沈吉', '功能科')">
                     <div class="role-icon"><i class="fa-solid fa-building-user"></i></div>
                     <div class="font-bold text-lg">科长</div>
                 </div>
-                <div class="role-card" onclick="enterApp('SQE', '李文峰 (工程师)', '李文峰')">
+                <div class="role-card" onclick="enterApp('SQE', '李文峰', '李文峰')">
                     <div class="role-icon"><i class="fa-solid fa-user-check"></i></div>
-                    <div class="font-bold text-lg">SQE</div>
+                    <div class="font-bold text-lg">SQE (李文峰)</div>
                 </div>
-                <div class="role-card" onclick="enterApp('QPL', '罗轶民 (经理)', '罗轶民')">
+                <div class="role-card" onclick="enterApp('QPL', '罗轶民', '罗轶民')">
                     <div class="role-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                    <div class="font-bold text-lg">QPL</div>
+                    <div class="font-bold text-lg">QPL (罗轶民)</div>
                 </div>
             </div>
         </div>
@@ -197,7 +189,7 @@
     <div id="mainContent" style="opacity: 0; display: none;">
         <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
             <div class="text-center md:text-left">
-                <h1 class="text-2xl font-bold tracking-tight text-black">欢迎您进入SQE供应商质量管理系统看板</h1>
+                <h1 class="text-2xl font-bold tracking-tight text-black">欢迎进入供应商质量看板</h1>
                 <div class="flex items-center gap-2 mt-2">
                     <span id="currentUserRole" class="px-2.5 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-lg uppercase"></span>
                     <p id="currentUserDisplay" class="text-[11px] text-[#86868b] font-bold uppercase"></p>
@@ -209,147 +201,113 @@
                 <div class="ios-multiselect" id="msButton" onclick="toggleDropdown()">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-filter text-blue-500 text-xs"></i>
-                        <span id="msLabel" class="font-bold text-black truncate max-w-[220px]">全集团视角 (全局穿透)</span>
+                        <span id="msLabel" class="font-bold text-black truncate max-w-[220px]">全集团视角</span>
                     </div>
                     <i class="fa-solid fa-chevron-down text-gray-300 text-[10px]"></i>
                 </div>
-                <div id="msDropdown" class="multiselect-dropdown scroll-container">
-                    <div class="px-3 py-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50 mb-2">选择穿透范围</div>
+                <div id="msDropdown" class="multiselect-dropdown">
                     <div id="msOptionsList"></div>
                 </div>
             </div>
         </header>
 
-        <!-- 第一行: KPI 磁贴 (H-40) -->
+        <!-- KPI 磁贴 -->
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 text-center">
-            <div class="glass-card p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
+            <div class="glass-card p-6 flex flex-col justify-between h-40 relative overflow-hidden">
                 <div class="flex justify-between items-center"><p class="text-[12px] font-bold text-[#86868b]">审核完成率</p><span class="kpi-tag" onclick="openModal('审核完成率')">AUDIT</span></div>
                 <h2 class="text-3xl font-extrabold text-[#1d1d1f]" id="kpi-audit">0%</h2>
                 <div class="w-full bg-[#E8E8ED] h-1.5 rounded-full overflow-hidden"><div id="pb-audit" class="bg-[var(--ios-blue)] h-full transition-all duration-1000"></div></div>
             </div>
-            <div class="glass-card p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
-                <div class="flex justify-between items-center"><p class="text-[12px] font-bold text-[#86868b]">整改完成率</p><span class="kpi-tag" onclick="openModal('整改闭环率')">NCR</span></div>
+            <div class="glass-card p-6 flex flex-col justify-between h-40 relative overflow-hidden">
+                <div class="flex justify-between items-center"><p class="text-[12px] font-bold text-[#86868b]">整改闭环率</p><span class="kpi-tag" onclick="openModal('整改闭环率')">NCR</span></div>
                 <h2 class="text-3xl font-extrabold text-[#1d1d1f]" id="kpi-ncr">0%</h2>
                 <div class="w-full bg-[#E8E8ED] h-1.5 rounded-full overflow-hidden"><div id="pb-ncr" class="bg-[var(--ios-green)] h-full transition-all duration-1000"></div></div>
             </div>
-            <div class="glass-card p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
-                <div class="flex justify-between items-center"><p class="text-[12px] font-bold text-[#86868b]">模具件认可率</p><span class="kpi-tag" onclick="openModal('模具件认可项目进度')">OTS</span></div>
+            <div class="glass-card p-6 flex flex-col justify-between h-40 relative overflow-hidden">
+                <div class="flex justify-between items-center"><p class="text-[12px] font-bold text-[#86868b]">模具件认可率</p><span class="kpi-tag" onclick="openModal('模具件认可进度')">OTS</span></div>
                 <h2 class="text-3xl font-extrabold text-[#1d1d1f]" id="kpi-ots">0%</h2>
                 <div class="w-full bg-[#E8E8ED] h-1.5 rounded-full overflow-hidden"><div id="pb-ots" class="bg-[var(--ios-orange)] h-full transition-all duration-1000"></div></div>
             </div>
-            <div class="glass-card p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
-                <div class="flex justify-between items-center"><p class="text-[12px] font-bold text-[#86868b]">量产批准率</p><span class="kpi-tag" onclick="openModal('量产批准项目进度')">PPAP</span></div>
+            <div class="glass-card p-6 flex flex-col justify-between h-40 relative overflow-hidden">
+                <div class="flex justify-between items-center"><p class="text-[12px] font-bold text-[#86868b]">量产批准率</p><span class="kpi-tag" onclick="openModal('量产批准进度')">PPAP</span></div>
                 <h2 class="text-3xl font-extrabold text-[#1d1d1f]" id="kpi-ppap">0%</h2>
                 <div class="w-full bg-[#E8E8ED] h-1.5 rounded-full overflow-hidden"><div id="pb-ppap" class="bg-[var(--ios-indigo)] h-full transition-all duration-1000"></div></div>
             </div>
         </section>
 
-        <!-- 第二行: 业务分析 (420px) -->
+        <!-- 业务分析 -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-            <!-- 审核任务分析 -->
+            <!-- 任务分布 -->
             <div class="glass-card p-8 flex flex-col h-[420px]">
-                <h3 class="card-title-bold mb-4">审核任务状态分析</h3>
+                <h3 class="card-title-bold mb-4">个人/组织 审核任务状态</h3>
                 <div class="flex-grow flex flex-col justify-center">
                     <div class="relative h-[180px] mb-6">
                         <canvas id="auditChart"></canvas>
                         <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                             <span class="text-3xl font-extrabold text-black" id="totalTasks">0</span>
-                            <span class="text-[9px] text-[#86868b] font-bold uppercase tracking-widest">年度总量</span>
+                            <span class="text-[9px] text-[#86868b] font-bold uppercase tracking-widest">任务总量</span>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="text-center p-3 bg-white/50 rounded-xl border border-white">
-                            <p class="text-[10px] text-[#86868b] font-bold mb-1 uppercase">执行中</p>
+                            <p class="text-[10px] text-[#86868b] font-bold mb-1 uppercase">待执行</p>
                             <p class="text-lg font-bold text-[var(--ios-orange)]" id="count-active">0</p>
                         </div>
                         <div class="text-center p-3 bg-white/50 rounded-xl border border-white">
-                            <p class="text-[10px] text-[#86868b] font-bold mb-1 uppercase">已完成</p>
+                            <p class="text-[10px] text-[#86868b] font-bold mb-1 uppercase">已结案</p>
                             <p class="text-lg font-bold text-[var(--ios-green)]" id="count-done">0</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 模具件认可统计 -->
+            <!-- 模具件 -->
             <div class="glass-card p-8 flex flex-col h-[420px]">
                 <div class="card-header-flex">
-                    <h3 class="card-title-bold">模具件认可统计</h3>
-                    <div class="search-trigger-btn" onclick="openModal('模具件认可项目进度')">
-                        <i class="fa-solid fa-magnifying-glass text-[12px]"></i>
-                    </div>
+                    <h3 class="card-title-bold">模具件认可统计 (OTS)</h3>
+                    <div class="search-trigger-btn" onclick="openModal('模具件认可进度')"><i class="fa-solid fa-magnifying-glass"></i></div>
                 </div>
-                <div class="flex-grow flex flex-col justify-between">
-                    <table class="standard-table h-full">
-                        <thead>
-                            <tr><th>项目名称</th><th>QPL</th><th>完成进度</th></tr>
-                        </thead>
-                        <tbody id="otsListBody"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 零部件量产批准统计 -->
-            <div class="glass-card p-8 flex flex-col h-[420px]">
-                <div class="card-header-flex">
-                    <h3 class="card-title-bold">零部件量产批准统计</h3>
-                    <div class="search-trigger-btn" onclick="openModal('量产批准项目进度')">
-                        <i class="fa-solid fa-magnifying-glass text-[12px]"></i>
-                    </div>
-                </div>
-                <div class="flex-grow flex flex-col justify-between">
-                    <table class="standard-table h-full">
-                        <thead>
-                            <tr><th>项目名称</th><th>QPL</th><th>完成进度</th></tr>
-                        </thead>
-                        <tbody id="ppapListBody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- 第三行: 动态流水与雷达 -->
-        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8 text-center">
-            <div class="lg:col-span-8 glass-card p-8 text-center">
-                <h3 class="card-title-bold mb-6">数字化协同实时流水</h3>
-                <div class="overflow-hidden">
-                    <table class="standard-table">
-                        <thead><tr><th class="w-16">序号</th><th>流程环节</th><th>责任人 (组织/科室)</th><th>同步时间</th></tr></thead>
-                        <tbody id="activityTableBody"></tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="lg:col-span-4 glass-card p-8">
-                <h3 class="card-title-bold mb-6">审核缺陷分布</h3>
-                <div class="h-[280px]"><canvas id="radarChart"></canvas></div>
-            </div>
-        </section>
-
-        <!-- 第四行: 风险监控 -->
-        <section class="glass-card p-10 overflow-hidden mb-12 text-center">
-            <h3 class="card-title-bold mb-8 text-center">高优先级风险监控 (逾期督办单)</h3>
-            <div class="overflow-x-auto">
                 <table class="standard-table">
-                    <thead><tr><th class="w-14">序号</th><th>异常流程</th><th>供应商名称</th><th>配套零件</th><th>当前节点</th><th>负责SQE</th><th>逾期天数</th><th>操作</th></tr></thead>
-                    <tbody id="riskTableBody"></tbody>
+                    <thead><tr><th>项目代码</th><th>负责人</th><th>进度</th></tr></thead>
+                    <tbody id="otsListBody"></tbody>
                 </table>
+            </div>
+
+            <!-- 量产件 -->
+            <div class="glass-card p-8 flex flex-col h-[420px]">
+                <div class="card-header-flex">
+                    <h3 class="card-title-bold">量产批准统计 (PPAP)</h3>
+                    <div class="search-trigger-btn" onclick="openModal('量产批准进度')"><i class="fa-solid fa-magnifying-glass"></i></div>
+                </div>
+                <table class="standard-table">
+                    <thead><tr><th>项目代码</th><th>负责人</th><th>进度</th></tr></thead>
+                    <tbody id="ppapListBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 风险与流水 -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+            <div class="lg:col-span-12 glass-card p-8">
+                <h3 class="card-title-bold mb-6">高优先级风险监控 (归属当前权限)</h3>
+                <div class="overflow-x-auto">
+                    <table class="standard-table">
+                        <thead><tr><th>序号</th><th>异常类别</th><th>供应商</th><th>配套项目</th><th>负责SQE</th><th>逾期</th><th>操作</th></tr></thead>
+                        <tbody id="riskTableBody"></tbody>
+                    </table>
+                </div>
             </div>
         </section>
     </div>
 
-    <!-- 弹窗详情页 -->
+    <!-- 弹窗 -->
     <div id="modalOverlay" class="modal-overlay" onclick="closeModal(event)">
         <div class="modal-content animate-fadeIn" onclick="event.stopPropagation()">
             <div class="flex justify-between items-center mb-8">
                 <h2 id="modalTitle" class="text-2xl font-bold text-black tracking-tight">详情</h2>
-                <button onclick="hideModal()" class="w-12 h-12 rounded-full bg-[#f5f5f7] flex items-center justify-center hover:bg-[#e8e8ed] transition"><i class="fa-solid fa-xmark text-gray-500 text-lg"></i></button>
+                <button onclick="hideModal()" class="w-10 h-10 rounded-full bg-[#f5f5f7] flex items-center justify-center"><i class="fa-solid fa-xmark text-gray-500"></i></button>
             </div>
-
-            <div class="mb-10 relative max-w-md mx-auto">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-gray-400 text-sm"></i>
-                <input type="text" id="modalSearchInput" onkeyup="filterModalTable()" placeholder="搜索姓名、项目或供应商..." class="ios-input pl-12">
-            </div>
-
-            <div class="overflow-x-auto max-h-[550px] scroll-container">
+            <div class="overflow-x-auto max-h-[500px]">
                 <table class="standard-table" id="detailTable">
                     <thead id="detailTableHeader"></thead>
                     <tbody id="detailTableBody"></tbody>
@@ -359,86 +317,125 @@
     </div>
 
     <script>
-        // --- 核心仿真数据矩阵 ---
+        // --- 仿真数据库 ---
         const matrixPool = [
-            { name: "李文峰", l1: "集团", l2: "整车部", sec: "橡塑科", audit: 23, active: 9, ncr: 14, rate: "60.9%", t1: 12, t2: 4, t3: 7 },
-            { name: "彭宏业", l1: "集团", l2: "整车部", sec: "焊接科", audit: 25, active: 9, ncr: 15, rate: "64.0%", t1: 14, t2: 5, t3: 6 },
-            { name: "裴少杰", l1: "集团", l2: "整车部", sec: "功能科", audit: 26, active: 9, ncr: 16, rate: "65.4%", t1: 10, t2: 8, t3: 8 },
-            { name: "杨温海", l1: "集团", l2: "发动机部", sec: "热机科", audit: 23, active: 9, ncr: 14, rate: "60.9%", t1: 11, t2: 6, t3: 6 },
-            { name: "施峻秋", l1: "集团", l2: "发动机部", sec: "传动科", audit: 25, active: 9, ncr: 15, rate: "64.0%", t1: 15, t2: 3, t3: 7 },
-            { name: "黄东华", l1: "极核", l2: "质量部", sec: "SQC", audit: 25, active: 7, ncr: 18, rate: "72.0%", t1: 10, t2: 5, t3: 10 },
-            { name: "罗轶民", l1: "集团", l2: "项目质量部", sec: "两轮", audit: 45, active: 25, ncr: 20, rate: "44.4%", t1: 20, t2: 10, t3: 15 }
+            { name: "李文峰", l1: "集团", l2: "整车部", sec: "橡塑科", audit: 23, active: 9, ncr: 14, rate: 60.9, t1: 12, t2: 4, t3: 7 },
+            { name: "彭宏业", l1: "集团", l2: "整车部", sec: "焊接科", audit: 25, active: 9, ncr: 15, rate: 64.0, t1: 14, t2: 5, t3: 6 },
+            { name: "裴少杰", l1: "集团", l2: "整车部", sec: "功能科", audit: 26, active: 9, ncr: 16, rate: 65.4, t1: 10, t2: 8, t3: 8 },
+            { name: "杨温海", l1: "集团", l2: "发动机部", sec: "热机科", audit: 23, active: 9, ncr: 14, rate: 60.9, t1: 11, t2: 6, t3: 6 },
+            { name: "施峻秋", l1: "集团", l2: "发动机部", sec: "传动科", audit: 25, active: 9, ncr: 15, rate: 64.0, t1: 15, t2: 3, t3: 7 },
+            { name: "黄东华", l1: "极核", l2: "质量部", sec: "SQC", audit: 25, active: 7, ncr: 18, rate: 72.0, t1: 10, t2: 5, t3: 10 },
+            { name: "罗轶民", l1: "集团", l2: "项目质量部", sec: "两轮", audit: 45, active: 25, ncr: 20, rate: 44.4, t1: 20, t2: 10, t3: 15 }
         ];
 
         const projectPool = {
             ots: [
-                { id: "6ARC", name: "6ARC 旗舰车架项目", qpl: "罗轶民", done: 32, total: 45, vendor: "敏实集团", overdue: 2, org: "整车部" },
-                { id: "6ARB", name: "6ARB 动力总成认可", qpl: "张鹏", done: 18, total: 36, vendor: "博世中国", overdue: 14, org: "发动机部" },
-                { id: "6ARA", name: "6ARA 极核智能电机", qpl: "黄东华", done: 10, total: 15, vendor: "宁德时代", overdue: 0, org: "极核" },
-                { id: "6ARD", name: "6ARD 越野平台悬挂", qpl: "罗轶民", done: 5, total: 20, vendor: "采埃孚", overdue: 5, org: "项目质量部" },
-                { id: "M601", name: "M601 控制单元模具", qpl: "张鹏", done: 38, total: 40, vendor: "德赛西威", overdue: 0, org: "电子电器部" }
+                { id: "6ARC", name: "6ARC 旗舰项目", qpl: "罗轶民", done: 32, total: 45, vendor: "敏实集团", overdue: 2, org: "项目质量部" },
+                { id: "6ARB", name: "6ARB 动力总成", qpl: "施峻秋", done: 18, total: 36, vendor: "博世中国", overdue: 14, org: "发动机部" },
+                { id: "6ARA", name: "6ARA 极核电机", qpl: "黄东华", done: 10, total: 15, vendor: "宁德时代", overdue: 0, org: "极核" },
+                { id: "M601", name: "M601 内饰项目", qpl: "李文峰", done: 38, total: 40, vendor: "德赛西威", overdue: 5, org: "整车部" }
             ],
             ppap: [
-                { id: "6ARC", name: "6ARC 车身量产批准", qpl: "罗轶民", done: 15, total: 30, vendor: "拓普集团", overdue: 21, org: "整车部" },
-                { id: "6ARB", name: "6ARB 传动系统 PPAP", qpl: "施峻秋", done: 28, total: 35, vendor: "舍弗勒", overdue: 3, org: "发动机部" },
-                { id: "6ARA", name: "6ARA 电池PACK量产", qpl: "黄东华", done: 20, total: 20, vendor: "宁德时代", overdue: 0, org: "极核" }
+                { id: "6ARC", name: "6ARC 车身批准", qpl: "罗轶民", done: 15, total: 30, vendor: "拓普集团", overdue: 21, org: "项目质量部" },
+                { id: "6ARB", name: "6ARB 传动PPAP", qpl: "施峻秋", done: 28, total: 35, vendor: "舍弗勒", overdue: 0, org: "发动机部" },
+                { id: "M601", name: "M601 电控PPAP", qpl: "李文峰", done: 20, total: 20, vendor: "宁德时代", overdue: 0, org: "整车部" }
             ]
         };
 
-        const flowList = ["审核需求", "模具件认可申请", "量产批准申请", "质量爬坡审核", "飞行专项审核", "问题改进"];
         const options = [
             {val: "全局", text: "全集团视角 (全局穿透)"},
             {val: "极核", text: "子公司：极核质量部"},
-            {val: "重庆", text: "子公司：重庆质量部"},
             {val: "整车部", text: "专业部：整车质量部"},
             {val: "发动机部", text: "专业部：发动机质量部"}
         ];
 
-        let currentRole = null, selectedFilters = ["全局"], auditInst = null, radarInst = null, currentModalContext = "";
+        let currentRole = null, selectedFilters = ["全局"], auditInst = null;
 
-        // --- 应用进入逻辑 ---
+        // --- 进入应用：权限隔离逻辑核心 ---
         function enterApp(role, display, defaultScope) {
             currentRole = { role, display, scope: defaultScope };
+            
             document.getElementById('currentUserRole').innerText = role;
             document.getElementById('currentUserDisplay').innerText = display;
-            if(role !== '总监') {
+
+            const msBtn = document.getElementById('msButton');
+            const msLabel = document.getElementById('msLabel');
+
+            if(role === 'SQE' || role === 'QPL') {
+                // 如果是具体人员视角，锁定过滤器，只看自己
+                selectedFilters = [display]; 
+                msBtn.style.pointerEvents = "none";
+                msBtn.style.opacity = "0.5";
+                msBtn.style.background = "#E8E8ED";
+                msLabel.innerText = "个人中心视角 (已锁定)";
+            } else if(role === '科长' || role === '部长') {
+                // 如果是管理者视角，锁定部门
                 selectedFilters = [defaultScope];
-                document.getElementById('msButton').style.pointerEvents = "none";
-                document.getElementById('msButton').style.opacity = "0.6";
-            } else selectedFilters = ["全局"];
+                msBtn.style.pointerEvents = "none";
+                msBtn.style.opacity = "0.7";
+                msLabel.innerText = `部门视角: ${defaultScope}`;
+            } else {
+                // 总监视角：完全自由
+                selectedFilters = ["全局"];
+                msBtn.style.pointerEvents = "auto";
+                msBtn.style.opacity = "1";
+                msBtn.style.background = "rgba(118, 118, 128, 0.08)";
+                msLabel.innerText = "全集团视角 (全局穿透)";
+            }
 
             document.getElementById('rolePortal').style.display = 'none';
             document.getElementById('mainContent').style.display = 'block';
             setTimeout(() => { document.getElementById('mainContent').style.opacity = '1'; }, 50);
-            document.body.style.overflow = 'auto';
-            initCharts(); renderMsOptions(); refreshDashboard();
+            
+            initCharts();
+            renderMsOptions();
+            refreshDashboard();
         }
-
-        function switchRole() { location.reload(); }
 
         function refreshDashboard() {
-            renderModuleList('ots'); renderModuleList('ppap');
-            renderRisk(); renderLogs(); updateKPIs(); updateCounts();
+            renderModuleList('ots');
+            renderModuleList('ppap');
+            renderRisk();
+            updateKPIs();
+            updateCounts();
         }
 
+        // --- 数据过滤逻辑核心 ---
         function getFilteredMatrix() {
-            if(selectedFilters.includes("全局")) return matrixPool;
-            return matrixPool.filter(i => selectedFilters.includes(i.l1) || selectedFilters.includes(i.l2));
+            const role = currentRole.role;
+            const user = currentRole.display;
+
+            if (role === 'SQE' || role === 'QPL') {
+                return matrixPool.filter(i => i.name === user);
+            }
+            if (selectedFilters.includes("全局")) return matrixPool;
+            return matrixPool.filter(i => selectedFilters.includes(i.l1) || selectedFilters.includes(i.l2) || selectedFilters.includes(i.sec));
         }
 
-        // --- 业务明细渲染 ---
+        function getFilteredProjects(type) {
+            const role = currentRole.role;
+            const user = currentRole.display;
+            const data = projectPool[type];
+
+            if (role === 'SQE' || role === 'QPL') {
+                return data.filter(i => i.qpl === user);
+            }
+            if (selectedFilters.includes("全局")) return data;
+            return data.filter(i => selectedFilters.some(f => i.org === f));
+        }
+
+        // --- UI 渲染函数 ---
         function renderModuleList(type) {
             const container = document.getElementById(`${type}ListBody`);
-            let list = projectPool[type].filter(i => selectedFilters.includes("全局") || selectedFilters.some(f => i.org?.includes(f) || i.l1 === f));
-            const displayList = list.slice(0, 5);
+            const list = getFilteredProjects(type);
 
-            container.innerHTML = displayList.map(d => {
+            container.innerHTML = list.length ? list.map(d => {
                 const percent = Math.round((d.done / d.total) * 100);
                 const color = type === 'ots' ? 'var(--ios-orange)' : 'var(--ios-indigo)';
                 return `
                 <tr>
-                    <td class="font-bold text-black text-center">${d.id}</td>
-                    <td class="font-medium text-center">${d.qpl}</td>
+                    <td class="font-bold text-black">${d.id}</td>
+                    <td class="font-medium">${d.qpl}</td>
                     <td>
                         <div class="mini-progress-wrap">
                             <div class="mini-progress-fill" style="width: ${percent}%; background: ${color}"></div>
@@ -446,114 +443,149 @@
                         </div>
                     </td>
                 </tr>`;
-            }).join('') || `<tr><td colspan="3" class="py-20 text-gray-300 text-xs">无匹配仿真项目</td></tr>`;
+            }).join('') : `<tr><td colspan="3" class="py-10 text-gray-400">暂无归属项目数据</td></tr>`;
         }
 
-        // --- 弹窗详情逻辑 ---
-        function openModal(title) {
-            const scopeText = selectedFilters.includes("全局") ? "全局" : selectedFilters.join('/');
-            document.getElementById('modalTitle').innerText = `${scopeText} - ${title} 详情`;
-            document.getElementById('modalOverlay').style.display = 'flex';
-            document.getElementById('modalSearchInput').value = "";
-            
-            if(title.includes("模具件")) currentModalContext = "ots";
-            else if(title.includes("量产批准")) currentModalContext = "ppap";
-            else currentModalContext = "audit";
+        function renderRisk() {
+            const tbody = document.getElementById('riskTableBody');
+            const ots = getFilteredProjects('ots');
+            const ppap = getFilteredProjects('ppap');
+            const combined = [...ots, ...ppap].filter(i => i.overdue > 0).sort((a,b) => b.overdue - a.overdue);
 
-            updateModalView();
+            tbody.innerHTML = combined.length ? combined.map((r, i) => `
+                <tr>
+                    <td class="text-gray-400 font-mono">${i+1}</td>
+                    <td class="font-semibold">逾期督办</td>
+                    <td class="font-medium">${r.vendor}</td>
+                    <td class="font-medium">${r.id}</td>
+                    <td class="font-semibold">${r.qpl}</td>
+                    <td class="red-alert">${r.overdue}d</td>
+                    <td><button class="px-2 py-1 bg-black text-white text-[10px] rounded-lg">处理</button></td>
+                </tr>`).join('') : `<tr><td colspan="7" class="py-10 text-gray-400">当前权限下无待处理风险</td></tr>`;
         }
 
-        function updateModalView() {
-            const head = document.getElementById('detailTableHeader');
-            const body = document.getElementById('detailTableBody');
-            const q = document.getElementById('modalSearchInput').value.toLowerCase();
-            
-            if (currentModalContext === 'audit') {
-                head.innerHTML = `<tr><th>序号</th><th>工程师</th><th>执行中</th><th>已完成</th><th>年度总计</th><th>达成率</th></tr>`;
-                const list = matrixPool.filter(i => (selectedFilters.includes("全局") || selectedFilters.includes(i.l1) || selectedFilters.includes(i.l2)) && i.name.toLowerCase().includes(q));
-                body.innerHTML = list.map((r, i) => `<tr><td class="text-gray-400 font-mono text-center">${i+1}</td><td class="font-bold text-center">${r.name}</td><td class="text-center">${r.active}</td><td class="text-center">${r.audit - r.active}</td><td class="text-center">${r.audit}</td><td class="font-extrabold text-black text-center">${r.rate}</td></tr>`).join('');
-            } else {
-                head.innerHTML = `<tr><th>序号</th><th>代码</th><th>项目详情</th><th>负责人</th><th>核心供应商</th><th>零件进度</th><th>达成率</th></tr>`;
-                const list = projectPool[currentModalContext].filter(i => (selectedFilters.includes("全局") || selectedFilters.some(f => i.org?.includes(f) || i.l1 === f)) && (i.name.toLowerCase().includes(q) || i.qpl.toLowerCase().includes(q) || i.id.toLowerCase().includes(q)));
-                body.innerHTML = list.map((d, i) => {
-                    const percent = Math.round((d.done / d.total) * 100);
-                    return `<tr><td class="text-gray-400 font-mono text-center">${i+1}</td><td class="font-bold text-center">${d.id}</td><td class="font-bold text-black text-center">${d.name}</td><td class="font-medium text-center">${d.qpl}</td><td class="text-center">${d.vendor}</td><td class="text-center">${d.done}/${d.total}</td><td class="font-extrabold text-black text-center">${percent}%</td></tr>`;
-                }).join('');
+        function updateKPIs() {
+            const matrix = getFilteredMatrix();
+            const ots = getFilteredProjects('ots');
+            const ppap = getFilteredProjects('ppap');
+
+            // 审核完成率计算
+            const totalA = matrix.reduce((s, i) => s + i.audit, 0);
+            const activeA = matrix.reduce((s, i) => s + i.active, 0);
+            const auditRate = totalA ? (((totalA - activeA) / totalA) * 100).toFixed(1) : "0.0";
+
+            // 项目认可率计算
+            const calcRate = (list) => {
+                const done = list.reduce((s, i) => s + i.done, 0);
+                const total = list.reduce((s, i) => s + i.total, 0);
+                return total ? ((done / total) * 100).toFixed(1) : "0.0";
+            };
+
+            const kpis = {
+                audit: auditRate,
+                ncr: (90 + Math.random() * 5).toFixed(1), // 仿真模拟
+                ots: calcRate(ots),
+                ppap: calcRate(ppap)
+            };
+
+            Object.keys(kpis).forEach(id => {
+                document.getElementById(`kpi-${id}`).innerText = kpis[id] + '%';
+                document.getElementById(`pb-${id}`).style.width = kpis[id] + '%';
+            });
+        }
+
+        function updateCounts() {
+            const matrix = getFilteredMatrix();
+            const total = matrix.reduce((s, i) => s + i.audit, 0);
+            const active = matrix.reduce((s, i) => s + i.active, 0);
+
+            document.getElementById('totalTasks').innerText = total;
+            document.getElementById('count-active').innerText = active;
+            document.getElementById('count-done').innerText = total - active;
+
+            if(auditInst) {
+                auditInst.data.datasets[0].data = [active, total - active];
+                auditInst.update();
             }
         }
 
-        function filterModalTable() { updateModalView(); }
-        function hideModal() { document.getElementById('modalOverlay').style.display = 'none'; }
-        function closeModal(e) { if(e.target.id === 'modalOverlay') hideModal(); }
-
-        // --- 其它逻辑 ---
-        function renderRisk() {
-            const tbody = document.getElementById('riskTableBody');
-            let data = [...projectPool.ots, ...projectPool.ppap].filter(x => x.overdue > 0 && (selectedFilters.includes("全局") || selectedFilters.some(f => x.org?.includes(f) || x.l1 === f)));
-            data.sort((a,b) => b.overdue - a.overdue);
-            tbody.innerHTML = data.map((r, i) => `<tr><td class="text-gray-400 font-mono text-center">${i+1}</td><td class="font-semibold text-center">${flowList[i%flowList.length]}</td><td class="font-medium text-center">${r.vendor}</td><td class="text-center font-medium">${r.id}配套</td><td class="text-center"><span class="px-2 py-1 bg-red-50 text-red-600 rounded-lg text-[10px] font-bold">节点审批</span></td><td class="font-semibold text-center">${r.qpl}</td><td class="red-alert text-center">${r.overdue}d</td><td class="text-center"><button class="px-2 py-1 bg-black text-white text-[10px] rounded-lg font-bold">详情</button></td></tr>`).join('');
+        // --- 交互功能 ---
+        function toggleDropdown() { 
+            const dd = document.getElementById('msDropdown'); 
+            dd.style.display = dd.style.display === 'block' ? 'none' : 'block'; 
         }
 
-        function renderLogs() {
-            const tbody = document.getElementById('activityTableBody');
-            let pool = matrixPool.filter(i => selectedFilters.includes("全局") || selectedFilters.includes(i.l1) || selectedFilters.includes(i.l2));
-            tbody.innerHTML = pool.slice(0, 5).map((a, i) => `<tr><td class="text-gray-400 font-mono text-center">${i+1}</td><td class="font-semibold text-center">${flowList[i%flowList.length]}</td><td class="font-medium text-center">${a.name} (${a.sec || a.l2})</td><td class="text-[#86868b] font-medium text-[11px] text-center">${i*11+1}min ago</td></tr>`).join('');
-        }
-
-        // --- 多选联动 ---
-        function toggleDropdown() { const dd = document.getElementById('msDropdown'); dd.style.display = dd.style.display === 'block' ? 'none' : 'block'; }
         function closeDropdowns() { document.getElementById('msDropdown').style.display = 'none'; }
+
         function renderMsOptions() {
             const list = document.getElementById('msOptionsList');
             const isDirector = currentRole.role === '总监';
             list.innerHTML = options.map(opt => {
                 const checked = selectedFilters.includes(opt.val) ? "checked" : "";
                 const disabled = !isDirector ? "disabled" : "";
-                return `<div class="multiselect-option"><input type="checkbox" value="${opt.val}" ${checked} ${disabled} onchange="handleFilterChange(this)"><span class="font-medium text-center">${opt.text}</span></div>`;
+                return `<div class="multiselect-option">
+                    <input type="checkbox" value="${opt.val}" ${checked} ${disabled} onchange="handleFilterChange(this)">
+                    <span class="font-medium">${opt.text}</span>
+                </div>`;
             }).join('');
         }
+
         function handleFilterChange(cb) {
-            if(cb.value === "全局") selectedFilters = ["全局"];
-            else {
-                if(cb.checked) { selectedFilters = selectedFilters.filter(f => f !== "全局"); selectedFilters.push(cb.value); }
-                else { selectedFilters = selectedFilters.filter(f => f !== cb.value); if(!selectedFilters.length) selectedFilters = ["全局"]; }
+            if(cb.value === "全局") {
+                selectedFilters = ["全局"];
+            } else {
+                selectedFilters = selectedFilters.filter(f => f !== "全局");
+                if(cb.checked) selectedFilters.push(cb.value);
+                else selectedFilters = selectedFilters.filter(f => f !== cb.value);
+                if(!selectedFilters.length) selectedFilters = ["全局"];
             }
-            document.getElementById('msLabel').innerText = selectedFilters.includes("全局") ? "全集团视角 (全局穿透)" : selectedFilters.join(', ');
-            renderMsOptions(); refreshDashboard();
+            document.getElementById('msLabel').innerText = selectedFilters.includes("全局") ? "全集团视角" : selectedFilters.join(', ');
+            renderMsOptions();
+            refreshDashboard();
         }
 
-        function updateKPIs() {
-            const f = selectedFilters.includes("全局") ? 1 : 0.88 + Math.random()*0.1;
-            ['audit', 'ncr', 'ots', 'ppap'].forEach(id => {
-                const b = id==='audit'?84.5 : id==='ncr'?92.1 : id==='ots'?68.2 : 77.4;
-                const v = (b*f).toFixed(1);
-                document.getElementById(`kpi-${id}`).innerText = v + '%';
-                document.getElementById(`pb-${id}`).style.width = v + '%';
-            });
+        function switchRole() { location.reload(); }
+
+        function openModal(title) {
+            document.getElementById('modalTitle').innerText = `${title} - 详细清单`;
+            document.getElementById('modalOverlay').style.display = 'flex';
+            
+            const head = document.getElementById('detailTableHeader');
+            const body = document.getElementById('detailTableBody');
+
+            if(title.includes("审核")) {
+                head.innerHTML = `<tr><th>人员</th><th>科室</th><th>执行中</th><th>年度总计</th><th>达成率</th></tr>`;
+                const data = getFilteredMatrix();
+                body.innerHTML = data.map(i => `<tr><td>${i.name}</td><td>${i.sec}</td><td>${i.active}</td><td>${i.audit}</td><td class="font-bold">${i.rate}%</td></tr>`).join('');
+            } else {
+                const type = title.includes("模具") ? 'ots' : 'ppap';
+                head.innerHTML = `<tr><th>代码</th><th>负责人</th><th>供应商</th><th>当前进度</th></tr>`;
+                const data = getFilteredProjects(type);
+                body.innerHTML = data.map(i => `<tr><td class="font-bold">${i.id}</td><td>${i.qpl}</td><td>${i.vendor}</td><td>${i.done}/${i.total}</td></tr>`).join('');
+            }
         }
 
-        function updateCounts() {
-            const pool = matrixPool.filter(i => selectedFilters.includes("全局") || selectedFilters.includes(i.l1) || selectedFilters.includes(i.l2));
-            const total = pool.reduce((s, i) => s + (i.audit || 0), 0);
-            const active = pool.reduce((s, i) => s + (i.active || 0), 0);
-            document.getElementById('totalTasks').innerText = total;
-            document.getElementById('count-active').innerText = active;
-            document.getElementById('count-done').innerText = total - active;
-            if(auditInst) { auditInst.data.datasets[0].data = [active, total-active]; auditInst.update(); }
-        }
+        function hideModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+        function closeModal(e) { if(e.target.id === 'modalOverlay') hideModal(); }
 
         function initCharts() {
             if(auditInst) auditInst.destroy();
-            auditInst = new Chart(document.getElementById('auditChart'), {
+            const ctx = document.getElementById('auditChart');
+            auditInst = new Chart(ctx, {
                 type: 'doughnut',
-                data: { labels: ['执行中', '已完成'], datasets: [{ data: [0, 0], backgroundColor: ['#FF9500', '#34C759'], borderWidth: 6, borderColor: '#fff' }] },
-                options: { cutout: '82%', maintainAspectRatio: false, plugins: { legend: { display: false } } }
-            });
-            if(radarInst) radarInst.destroy();
-            radarInst = new Chart(document.getElementById('radarChart'), {
-                type: 'radar', 
-                data: { labels: ['体系能力', '过程控制', '产品质量', '风险防范', '响应效率'], datasets: [{ label: '分值', data: [65, 85, 42, 30, 55], backgroundColor: 'rgba(0, 122, 255, 0.1)', borderColor: '#007AFF', borderWidth: 2, pointRadius: 2 }] },
-                options: { maintainAspectRatio: false, scales: { r: { ticks: { display: false }, pointLabels: { font: { size: 10, weight: '600' } } } }, plugins: { legend: { display: false } } }
+                data: {
+                    labels: ['执行中', '已结案'],
+                    datasets: [{
+                        data: [0, 0],
+                        backgroundColor: ['#FF9500', '#34C759'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    cutout: '80%',
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
             });
         }
     </script>
